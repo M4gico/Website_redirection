@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <!-- Load configuration -->
+    <script src="config.js"></script>
+    <script>
+        function performRedirect() {
+            // Get URL from config, default to google if missing
+            const targetUrl = (typeof config !== 'undefined' && config.redirectUrl) 
+                ? config.redirectUrl 
+                : "https://www.google.com";
+            
+            // set the link for the manual anchor tag
+            const manualLink = document.getElementById('manual-link');
+            if (manualLink) {
+                manualLink.href = targetUrl;
+                manualLink.innerText = targetUrl;
+            }
+
+            // Redirect
+            window.location.href = targetUrl;
+        }
+
+        // Run as soon as possible
+        window.onload = performRedirect;
+    </script>
+</head>
+<body>
+    <div class="loader"></div>
+    <p>Redirecting to <a id="manual-link" href="#">destination</a>...</p>
+</body>
+</html>
