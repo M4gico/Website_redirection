@@ -29,8 +29,10 @@
             100% { transform: rotate(360deg); }
         }
     </style>
-    <!-- Load configuration -->
-    <script src="config.js"></script>
+    <!-- Load configuration with cache busting to ensure latest redirectUrl is used -->
+    <script>
+        document.write('<script src="config.js?v=' + new Date().getTime() + '"><\/script>');
+    </script>
     <script>
         function performRedirect() {
             // Get URL from config, default to google if missing
